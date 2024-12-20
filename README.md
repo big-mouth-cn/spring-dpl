@@ -14,5 +14,5 @@ GET http://localhost:8080/get?pluginKey=demo-plugin
 再次请求测试接口（第二步）。此时接口返回：`plugin not found`，表示插件已经卸载了。
 
 ### 五、添加/替换插件
-重新将 spring-dpl-example-plugin-demo-2.0.0.jar 放入 plugins 目录下。
+重新将 spring-dpl-example-plugin-demo-1.0.0.jar 放入 plugins 目录下。
 再次请求测试接口（第二步）。此时接口返回：`Hello, I'm DemoMethodService, get method handle.`，表示插件被成功执行。
