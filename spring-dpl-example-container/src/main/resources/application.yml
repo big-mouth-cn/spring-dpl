@@ -1,0 +1,6 @@
+server:
+  port: 8080
+spring:
+  dpl:
+    plugin-dir: ./plugins/
+    base-package-to-scan-of-plugin: io.github.bigmouthcn.plugin.*

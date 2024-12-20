@@ -1,0 +1,3 @@
+# Request get method
+
+GET http://localhost:8080/get?pluginKey=demo-plugin
