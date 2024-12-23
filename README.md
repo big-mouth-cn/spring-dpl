@@ -5,7 +5,7 @@ DPL，全称：Dynamic Plug-In Loader。这是一款基于Spring环境构建的�
 - 插件：Plug-In，是一种基于某些约定接口或规范来实现的程序，它必须依赖主系统运行。
 - 热部署：在不重启主系统的前提下，可以更新插件。
 
-:exclamation: 仅支持插件中如下声明注解的类才会装载到SpringContext（`需要更多支持请自行扩展`）：
+:exclamation: 仅支持插件中如下注解声明的类才会装载到SpringContext（`需要更多支持请自行扩展`）：
 ```
 org.springframework.stereotype.Component.class
 org.springframework.stereotype.Repository.class
@@ -13,11 +13,11 @@ org.springframework.stereotype.Service.class
 org.springframework.stereotype.Controller.class
 ```
 
-## 原理
-1. 定时（默认1分钟）扫描一次插件目录中（../plugins/）插件文件（xxx-plugin.jar）的变化；
-2. 发生变化的插件会扫描注解类，然后通过 AnnotationConfigApplicationContext 来加载到Spring中；
-3. 加载完成后会将插件注册到 PluginBus 容器里；
-4. 通过 PluginBus 容器查找到插件，并获取实例进行使用。
+## 工作流程
+1. 主系统定时（默认1分钟）扫描一次插件目录中（../plugins/）插件文件（xxx-plugin.jar）的变化；
+2. 扫描发生变化的插件里的注解类，这些类通过 AnnotationConfigApplicationContext 加载到Spring中；
+3. 加载完成后将插件注册到 PluginBus 容器里；
+4. 主系统可以通过 PluginBus 容器查找到插件，调用插件里的类和方法。
 
 # 示例
 
