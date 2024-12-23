@@ -19,7 +19,35 @@ org.springframework.stereotype.Controller.class
 3. 加载完成后将插件注册到 PluginBus 容器里；
 4. 主系统可以通过 PluginBus 容器查找到插件，调用插件里的类和方法。
 
-# 示例
+# 快速开始
+## 导入依赖
+### Gradle
+```angular2html
+implementation 'io.github.big-mouth-cn:spring-boot-starter-dpl:1.0.0'
+```
+
+### Maven
+```angular2html
+<dependency>
+    <groupId>io.github.big-mouth-cn</groupId>
+    <artifactId>spring-boot-starter-dpl</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+> 如果不在SpringBoot环境里使用，请修改成 spring-dpl 的依赖。
+
+## 调用插件
+
+```java
+@Autowired
+private PluginBus pluginBus;
+
+Plugin plugin = pluginBus.lookup("demo-plugin");
+MethodService methodService = plugin.getService(MethodService.class);
+Object res = methodService.getMethodHandle();
+```
+
+# IDEA 示例
 
 ### 一、启动 container
 首先通过 IDEA 启动 spring-dpl-example-container 项目的 ContainerApplication 类。
