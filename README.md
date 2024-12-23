@@ -1,4 +1,25 @@
-## 测试插件热部署
+# What is spring-dpl?
+DPL，全称：Dynamic Plug-In Loader。这是一款基于Spring环境构建的简易版动态插件加载开发套件。 它的主要作用是支持在Spring环境中不重启主系统的情况下实现插件的热部署。
+
+## 说明
+- 插件：Plug-In，是一种基于某些约定接口或规范来实现的程序，它必须依赖主系统运行。
+- 热部署：在不重启主系统的前提下，可以更新插件。
+
+:exclamation: 仅支持插件中如下声明注解的类才会装载到SpringContext（`需要更多支持请自行扩展`）：
+```
+org.springframework.stereotype.Component.class
+org.springframework.stereotype.Repository.class
+org.springframework.stereotype.Service.class
+org.springframework.stereotype.Controller.class
+```
+
+## 原理
+1. 定时（默认1分钟）扫描一次插件目录中（../plugins/）插件文件（xxx-plugin.jar）的变化；
+2. 发生变化的插件会扫描注解类，然后通过 AnnotationConfigApplicationContext 来加载到Spring中；
+3. 加载完成后会将插件注册到 PluginBus 容器里；
+4. 通过 PluginBus 容器查找到插件，并获取实例进行使用。
+
+# 示例
 
 ### 一、启动 container
 首先通过 IDEA 启动 spring-dpl-example-container 项目的 ContainerApplication 类。
